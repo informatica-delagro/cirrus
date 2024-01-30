@@ -9,7 +9,7 @@
             var keys = array.length;
             while(keys--) {
                 var subarray = array[keys].split("=");
-                this.params[subarray[0]] = subarray[1].replace(/\+/g, " ");
+                this.params[subarray[0]] = subarray[1] /*.replace(/\+/g, " ")*/;
             }
         },
         routes: [],
@@ -194,7 +194,7 @@
         var value, key, current;
         while(param = body_params_regx.exec(params)) {
           key     = decodeURIComponent(param[1]).replace("[]", "");
-          value   = wApp.getType(decodeURIComponent(param[2]).replace(/\+/g, " "));
+          value   = wApp.getType(decodeURIComponent(param[2]) /*.replace(/\+/g, " ")*/);
           current = req.decodeParams[key];
 
           if ( current === undefined ) {
@@ -208,8 +208,8 @@
 
       // Body params if any
       if(split_request.length == 2) {
-        params = req.body = split_request[1].trim().replace(/\+/g, " ");
-        while(body = body_params_regx.exec(params)) {
+        params = req.body = split_request[1].trim() /*.replace(/\+/g, " ")*/;
+        /*while(*/ body = body_params_regx.exec(params) ;/*) {
           // check for method en params
           if (body[1] == "_method" && decodeURIComponent(body[2]).match(/^(PUT|DELETE)$/i)) {
               req.verb = decodeURIComponent(body[2]).toUpperCase();
@@ -226,7 +226,7 @@
               }
           }
         }
-      }
+      }*/
       return(req);
     }
 
